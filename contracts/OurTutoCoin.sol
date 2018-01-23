@@ -41,6 +41,41 @@ contract OurTutoCoin {
 		return totalSupply;
 	}
 
+	/**
+	* @dev Gets the balance of the specified address.
+	* @param tokenOwner The address to query the the balance of.
+	* @return An uint256 representing the amount owned by the passed address.
+	*/
+	function balanceOf(address tokenOwner) public view returns (uint256 balance) {
+		 return balances[tokenOwner];
+	}	
+
+	/**
+	* @dev Function to check the amount of tokens that an owner allowed to a spender.
+	* @param _owner address The address which owns the funds.
+	* @param _spender address The address which will spend the funds.
+	* @return A uint256 specifying the amount of tokens still available for the spender.
+	*/
+	function allowance(address _owner, address _spender) public view returns (uint256) {
+		return allowed[_owner][_spender];
+	}
+
+	/**
+	* @dev transfer token for a specified address
+	* @param _to The address to transfer to.
+	* @param _value The amount to be transferred.
+	*/
+	function transfer(address _to, uint256 _value) public returns (bool) {
+		require(_to != address(0));
+		require(_value <= balances[msg.sender]);
+
+		// SafeMath.sub will throw if there is not enough balance.
+		balances[msg.sender] = balances[msg.sender].sub(_value);
+		balances[_to] = balances[_to].add(_value);
+		Transfer(msg.sender, _to, _value);
+		return true;
+	}
+
 
 
 }
