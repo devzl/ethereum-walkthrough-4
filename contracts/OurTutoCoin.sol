@@ -10,4 +10,25 @@ contract OurTutoCoin {
 	string public name = "Our Tutorial Coin";
 	string public symbol = "OTC";
 	uint8 public decimals = 2;
+
+	mapping(address => uint256) balances;
+	mapping (address => mapping (address => uint256)) internal allowed;
+
+	address public owner;
+
+	event Transfer(address indexed from, address indexed to, uint256 value);
+	event Approval(address indexed owner, address indexed spender, uint256 value);
+	event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+	event Mint(address indexed to, uint256 amount);
+
+	/**
+	* @dev Throws if called by any account other than the owner.
+	*/
+	modifier onlyOwner() {
+		require(msg.sender == owner);
+		_;
+	}
+
+
+
 }
