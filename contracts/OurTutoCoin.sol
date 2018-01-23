@@ -29,6 +29,18 @@ contract OurTutoCoin {
 		_;
 	}
 
+	/**
+	* @dev The OurTutoCoin constructor sets the original `owner` of the contract to the sender
+	* account.
+	*/
+	function OurTutoCoin() public {
+		owner = msg.sender;
+	}
+
+	function totalSupply() public constant returns (uint256 _totalSupply) {
+		return totalSupply;
+	}
+
 
 
 }
